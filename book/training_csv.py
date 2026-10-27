@@ -134,3 +134,28 @@ def load_test_csv(source, labels_path=None):
                                test_labels=dict(Counter(data["label"])),
                                method="固定ラベルでテストデータの行だけを読み込む。第5章の評価で一度だけ使う")
     return data
+
+def load_test_inputs(source):
+    """テストデータの6駅の、価格以外の列だけを読み込む。価格の列は読み込まない（保留率の計算用）。"""
+    source = Path(source)
+    before = fingerprint(source)
+    if before != SOURCE_SHA256:
+        raise ValueError("教材CSVの指紋が一致しません。別の取得版へ自動で切り替えません")
+    labels = fixed_labels()
+    raw, ids = allowed_lines(source, {key for key in labels if labels[key] == "テストデータ"}, labels, {"テストデータ"})
+    data, encoding = read_columns(raw, list(FIELDS))
+    if "取引価格（総額）" in data.columns:
+        raise ValueError("価格の列が読み込まれています")
+    data = data.rename(columns=FIELDS)
+    data.index = pd.Index(ids, name="source_row")
+    data["year"] = data["year"].str.extract(r"^(202[1-5])年第[1-4]四半期$", expand=False).fillna("")
+    data = data.loc[(data["information_type"] == "不動産取引価格情報") & (data["kind"] == "中古マンション等")
+                    & (data["prefecture"] == "東京都") & (data["city"] == "世田谷区")
+                    & data["station"].isin(STATIONS) & (data["year"] != "")].copy()
+    if len(data) != 316:
+        raise ValueError("6駅のテストデータの件数が316件と一致しません")
+    if fingerprint(source) != before:
+        raise ValueError("実行中に元CSVの指紋が変わりました")
+    data.attrs["audit"] = dict(source_sha256=before, encoding=encoding, test_price_values_read=0,
+                               method="テストデータの行の、価格以外の列だけを読み込む")
+    return data

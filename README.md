@@ -11,7 +11,7 @@
 | `ch02/` | CSVの列と件数を確かめるプログラム | 第2章 |
 | `book/` | 選別、回帰、評価、範囲の確認、モデルの書き出しのプログラムと、そのテスト | 第2章〜第8章 |
 | `skill/mansion-price/` | 第7章・第8章で作るスキル（SKILL.md、predict.py、model.json、テスト） | 第7章・第8章、付録 |
-| `verification/` | 各章で何を確かめたかの検証記録 | 巻末 |
+| `verification/` | 各章で何を確かめたかの検証記録と、4-9で使う ch04_linest.xlsx（Excel で LINEST を計算するファイル） | 第4章・巻末 |
 
 ## 準備
 

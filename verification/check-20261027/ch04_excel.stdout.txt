@@ -1,0 +1,5 @@
+{
+  "written": "ch04_linest.xlsx",
+  "rows": 566,
+  "columns": 13
+}

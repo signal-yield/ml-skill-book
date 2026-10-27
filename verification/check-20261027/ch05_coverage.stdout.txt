@@ -1,0 +1,18 @@
+{
+  "test_rows": 316,
+  "answered": 143,
+  "withheld": 173,
+  "withheld_rate": 0.5475,
+  "withheld_reasons": {
+    "範囲の外（面積）": 134,
+    "入力が足りない（改装）": 34,
+    "入力が足りない（建築年）": 5
+  },
+  "same_as_evaluated_rows": true,
+  "audit": {
+    "source_sha256": "36f5d00a50f34d8c1bcbfc7c35e617604ec119e4fb986b991b32c88a2aabaadd",
+    "encoding": "cp932",
+    "test_price_values_read": 0,
+    "method": "テストデータの行の、価格以外の列だけを読み込む"
+  }
+}
