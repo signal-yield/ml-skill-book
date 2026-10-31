@@ -11,6 +11,25 @@ ROOM = dict(station="用賀", distance=6, area=70, built_year=2005, renovation="
 
 
 class PredictTests(unittest.TestCase):
+    def test_success_output_fields(self):
+        result = predict.answer(ROOM, MODEL)
+        self.assertEqual(result["status"], "予測しました")
+        for field in ("meaning", "error"):
+            with self.subTest(field=field):
+                self.assertIn(field, result)
+                self.assertIsInstance(result[field], str)
+                self.assertTrue(result[field].strip())
+
+    def test_failure_output_scope(self):
+        for changes in ({"station": "渋谷"}, {"area": 300}, {"built_year": ""},
+                        {"distance": "不明"}, {"renovation": "不明"}, {"year": 2024}):
+            with self.subTest(changes=changes):
+                result = predict.answer(dict(ROOM, **changes), MODEL)
+                self.assertEqual(result["status"], "予測できません")
+                self.assertIn("scope", result)
+                self.assertIsInstance(result["scope"], str)
+                self.assertTrue(result["scope"].strip())
+
     def test_inside(self):
         result = predict.answer(ROOM, MODEL)
         self.assertEqual(result["status"], "予測しました")
