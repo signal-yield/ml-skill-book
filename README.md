@@ -1,5 +1,9 @@
 # ml-skill-book
 
+- 2026年11月9日発売：『AIエージェントで機械学習をスキルにする』。
+- Kindle版：ASIN B0HR1XKM3J（[Amazon.co.jp](https://www.amazon.co.jp/dp/B0HR1XKM3J)）。
+- 無料期間：日本時間 2026年11月11日17時ごろ〜11月16日17時ごろ。
+
 『AIエージェントで機械学習をスキルにする』（松田幸一、Signal Yield Advisory）の配布ファイルです。本書と同じデータとプログラムで、本書と同じ数値を再現できます。
 
 ## 入っているもの
@@ -15,7 +19,7 @@
 
 ## 準備
 
-Python 3.12 と、NumPy・pandas・Matplotlib を使います。Windows の PowerShell での例です。
+Python 3.11 または 3.12（本書の確認は 3.11、READMEの手順例は 3.12）と、NumPy・pandas・Matplotlib を使います。Windows の PowerShell での例です。
 
 ```powershell
 py -3.12 -m venv .venv
